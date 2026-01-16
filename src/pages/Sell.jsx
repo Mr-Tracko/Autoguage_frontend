@@ -10,7 +10,7 @@ export default function SellVehicle() {
     email: '',
     city: '',
     state: '',
-    fulladdress: '',
+    fullAddress: '',
 
     // Vehicle Details
     brand: '',
@@ -53,43 +53,113 @@ export default function SellVehicle() {
     'Alloy Wheels',
   ];
 
-  const handleSubmit = async (req, res) => {
+  // const handleSubmit = async (req, res) => {
+  //   try {
+  //     const res = await fetch("http://localhost:5000/api/sellers", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: Json.stringify({
+  //         name: formData.sellerName,
+  //         contactNo: formData.contactNo,
+  //         email: formData.email,
+  //         fullAddress: formData.address,
+  //         city: formData.city,
+  //         state: formData.state
+  //       })
+  //     });
+
+  //     if (!res.ok) {
+  //       throw new Error(data.error || "Failed to create seller");
+  //     }
+
+  //     // Seller created successfully
+
+  //     // This is the MongoDB _id of the seller
+  //     const sellerId = data._id;
+
+  //     // You will use this sellerId when saving the vehicle
+  //     console.log("Seller ID:", sellerId);
+
+  //     alert("Seller registered successfully!");
+
+  //   } catch (error) {
+  //     console.error("Error creating seller:", error);
+  //     alert(error.message || "Something went wrong");
+  //   }
+  // }
+  const handleSubmit = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/sellers", {
+      const sellerRes = await fetch("http://localhost:5000/api/sellers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: Json.stringify({
-          name: formData.sellerName,
+        body: JSON.stringify({
+          name: formData.name,
           contactNo: formData.contactNo,
           email: formData.email,
-          fullAddress: formData.address,
+          fullAddress: formData.fullAddress,
           city: formData.city,
           state: formData.state
         })
       });
 
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to create seller");
+      const sellerData = await sellerRes.json();
+
+      if (!sellerRes.ok) {
+        throw new Error(sellerData.error || "Failed to create seller");
       }
 
-      // Seller created successfully
-      console.log("Seller created:", data);
+      const sellerId = sellerData._id;
+      console.log("Seller created:", sellerId);
 
-      // This is the MongoDB _id of the seller
-      const sellerId = data._id;
+      //for vehicle
+      const vehicleRes = await fetch("http://localhost:5000/api/vehicles", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          seller: sellerId,
 
-      // You will use this sellerId when saving the vehicle
-      console.log("Seller ID:", sellerId);
+          brand: formData.brand,
+          model: formData.model,
+          year: Number(formData.year),
+          mileage: Number(formData.mileage),
+          condition: formData.condition,
+          fuelType: formData.fuelType,
+          transmission: formData.transmission,
+          engineCC: Number(formData.engineCC),
+          registrationNumber: formData.registrationNumber,
+          ownershipType: formData.ownershipType,
+          insuranceValidity: formData.insuranceValidity,
+          askingPrice: Number(formData.price),
+          aiSuggestedPrice: aiPriceSuggestion,
+          serviceHistory: formData.serviceHistory,
+          description: formData.description,
+          features: selectedFeatures,
+          images: [] // later you’ll replace this with uploaded image URLs
+        })
+      });
 
-      alert("Seller registered successfully!");
+      const vehicleData = await vehicleRes.json();
+
+      if (!vehicleRes.ok) {
+        throw new Error(vehicleData.error || "Failed to create vehicle");
+      }
+
+      console.log("Vehicle created:", vehicleData);
+
+      alert("Vehicle listed successfully!");
 
     } catch (error) {
-      console.error("Error creating seller:", error);
+      console.error("Submission error:", error);
       alert(error.message || "Something went wrong");
     }
-  }
+  };
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -244,8 +314,8 @@ export default function SellVehicle() {
                 <label className="block text-sm font-medium mb-2 text-slate-300">Full Address</label>
                 <input
                   type="text"
-                  name="fulladdress"
-                  value={formData.fulladdress}
+                  name="fullAddress"
+                  value={formData.fullAddress}
                   onChange={handleInputChange}
                   placeholder="e.g., 123 Main Street"
                   className="w-full bg-slate-800/50 border border-slate-700/50 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition"
@@ -518,8 +588,8 @@ export default function SellVehicle() {
                   key={feature}
                   onClick={() => handleFeatureToggle(feature)}
                   className={`px-4 py-3 rounded-lg font-medium transition ${selectedFeatures.includes(feature)
-                      ? 'bg-cyan-500/30 border border-cyan-400 text-cyan-300'
-                      : 'bg-slate-800/50 border border-slate-700/50 text-slate-300 hover:border-slate-600'
+                    ? 'bg-cyan-500/30 border border-cyan-400 text-cyan-300'
+                    : 'bg-slate-800/50 border border-slate-700/50 text-slate-300 hover:border-slate-600'
                     }`}
                 >
                   {feature}
@@ -544,8 +614,8 @@ export default function SellVehicle() {
               onDragOver={handleDrag}
               onDrop={handleDrop}
               className={`relative border-2 border-dashed rounded-xl p-8 text-center transition cursor-pointer ${dragActive
-                  ? 'border-cyan-400 bg-cyan-500/10'
-                  : 'border-slate-700/50 bg-slate-800/30 hover:border-slate-600/50'
+                ? 'border-cyan-400 bg-cyan-500/10'
+                : 'border-slate-700/50 bg-slate-800/30 hover:border-slate-600/50'
                 }`}
             >
               <input
@@ -601,7 +671,7 @@ export default function SellVehicle() {
 
           {/* Submit Section */}
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            <button onclick={handleSubmit} className="flex-1 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 rounded-lg font-semibold transition transform hover:scale-105">
+            <button onClick={handleSubmit} className="flex-1 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 rounded-lg font-semibold transition transform hover:scale-105">
               List Vehicle
             </button>
             <button className="flex-1 h-12 bg-slate-800 hover:bg-slate-700 rounded-lg font-semibold transition">
