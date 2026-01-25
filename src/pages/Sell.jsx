@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, X, Sparkles, Camera, AlertCircle, User, Phone, MapPin, FileText } from 'lucide-react';
+import { Upload, X, Sparkles, Camera, AlertCircle, User, Phone, MapPin, FileText, Type } from 'lucide-react';
 import Navbar from './Navbar';
 
 export default function SellVehicle() {
@@ -17,7 +17,7 @@ export default function SellVehicle() {
     model: '',
     year: '',
     mileage: '',
-    condition: '',
+    Type: '',
     fuelType: '',
     transmission: '',
     price: '',
@@ -128,7 +128,7 @@ export default function SellVehicle() {
           model: formData.model,
           year: Number(formData.year),
           mileage: Number(formData.mileage),
-          condition: formData.condition,
+          Type: formData.Type,
           fuelType: formData.fuelType,
           transmission: formData.transmission,
           engineCC: Number(formData.engineCC),
@@ -213,32 +213,72 @@ export default function SellVehicle() {
     setImages(prev => prev.filter(img => img.id !== id));
   };
 
+  // const getAIPriceSuggestion = async () => {
+  //   const res = await fetch("http://localhost:5000/api/predict", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       brand,
+  //       Car_Name,
+  //       Drive,
+  //       Type,
+  //       Distance,
+  //       Year,
+  //       Owner
+  //     })
+  //   });
+
+  //   const data = await res.json();
+  //   setAiPriceSuggestion(data.predicted_price);
+  // };
+
   const getAIPriceSuggestion = async () => {
-    if (!formData.brand || !formData.model || !formData.year || !formData.mileage || !formData.condition) {
-      alert('Please fill in all vehicle details');
+    if (
+      !formData.brand ||
+      !formData.model ||
+      !formData.year ||
+      !formData.mileage ||
+      !formData.Type
+    ) {
+      alert("Please fill in all vehicle details");
       return;
     }
 
     setLoadingAI(true);
+    const OwnerMap = {
+      first: 4,
+      second: 3,
+      third: 2,
+      more: 1,
+    }
 
-    // Simulate AI API call
-    setTimeout(() => {
-      const basePrices = {
-        'excellent': 1200,
-        'good': 900,
-        'fair': 650,
-        'poor': 400
-      };
+    try {
+      const res = await fetch("http://localhost:5000/api/predict", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          brand: formData.brand,
+          Car_Name: formData.model,
+          Drive: formData.transmission,
+          Type: formData.Type,
+          Distance: Number(formData.mileage),
+          Year: Number(formData.year),
+          Owner: OwnerMap[formData.ownershipType],
+        }),
+      });
 
-      const basePrice = basePrices[formData.condition] || 800;
-      const mileageDeduction = (parseInt(formData.mileage) / 1000) * 5;
-      const yearDeduction = (2025 - parseInt(formData.year)) * 50;
-      const suggestedPrice = Math.max(200, basePrice * 1000 - mileageDeduction * 1000 - yearDeduction * 1000);
-
-      setAiPriceSuggestion(Math.round(suggestedPrice / 1000) * 1000);
+      const data = await res.json();
+      setAiPriceSuggestion(data.predicted_price);
+    } catch (err) {
+      console.error("AI price error:", err);
+      alert("Failed to get AI price");
+    } finally {
       setLoadingAI(false);
-    }, 2000);
+    }
   };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white pt-24">
@@ -412,20 +452,21 @@ export default function SellVehicle() {
                 />
               </div>
 
-              {/* Condition */}
+              {/* Type */}
               <div>
-                <label className="block text-sm font-medium mb-2 text-slate-300">Condition</label>
+                <label className="block text-sm font-medium mb-2 text-slate-300">Type of Vehicle</label>
                 <select
-                  name="condition"
-                  value={formData.condition}
+                  name="Type"
+                  value={formData.Type}
                   onChange={handleInputChange}
                   className="w-full bg-slate-800/50 border border-slate-700/50 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition"
                 >
-                  <option value="">Select condition</option>
-                  <option value="excellent">Excellent</option>
-                  <option value="good">Good</option>
-                  <option value="fair">Fair</option>
-                  <option value="poor">Poor</option>
+                  <option value="">Select Type of your vehicle</option>
+                  <option value="Hatchback">Hatchback</option>
+                  <option value="Sedan">Sedan</option>
+                  <option value="SUV">SUV</option>
+                  <option value="Lux-sedan">Lux-Sedan</option>
+                  <option value="Lux-SUV">Lux-SUV</option>
                 </select>
               </div>
 
@@ -457,8 +498,8 @@ export default function SellVehicle() {
                   className="w-full bg-slate-800/50 border border-slate-700/50 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition"
                 >
                   <option value="">Select transmission</option>
-                  <option value="manual">Manual</option>
-                  <option value="automatic">Automatic</option>
+                  <option value="Manual">Manual</option>
+                  <option value="Automatic">Automatic</option>
                 </select>
               </div>
 
