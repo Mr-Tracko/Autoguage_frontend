@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Search, Filter, Heart, MapPin, Gauge, Fuel, Users, Calendar, TrendingUp, Star, ChevronRight, X, AlertCircle, ChevronDown } from 'lucide-react';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 export default function BuyPage() {
   const [selectedVehicle, setSelectedVehicle] = useState(null);
@@ -87,7 +88,7 @@ export default function BuyPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-900">
         <Navbar />
         <div className="text-center mt-40 text-slate-400 text-xl">
           Loading vehicles...
@@ -98,9 +99,9 @@ export default function BuyPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-900">
         <Navbar />
-        <div className="text-center mt-40 text-red-400 text-xl">
+        <div className="text-center mt-40 text-red-600 text-xl">
           {error}
         </div>
       </div>
@@ -108,31 +109,31 @@ export default function BuyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-900">
       <Navbar />
 
       <div className="pt-24 pb-12">
         {/* Hero Banner */}
-        <div className="bg-gradient-to-r from-slate-900/80 via-slate-800/60 to-slate-900/80 border-b border-slate-800 py-8 px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-r from-blue-50 via-cyan-50 to-blue-50 border-b border-slate-200 py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold mb-3">
               Find Your Perfect
-              <span className="block bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
                 Used Vehicle
               </span>
             </h1>
-            <p className="text-slate-300 text-lg">AI-verified pricing, health scores & intelligent comparisons</p>
+            <p className="text-slate-600 text-lg">AI-verified pricing, health scores & intelligent comparisons</p>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-6 mt-8">
             {/* Left Sidebar - Filters */}
-            <div className="lg:w-65 flex-shrink-0">
-              <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 sticky top-24">
+            <div className="lg:w-64 flex-shrink-0">
+              <div className="bg-white border border-slate-200 rounded-2xl p-6 sticky top-24 shadow-sm hover:shadow-md transition">
                 {/* Budget Filter */}
-                <div className="mb-8 pb-8 border-b border-slate-800">
-                  <h3 className="text-lg font-semibold mb-4 text-white">Budget</h3>
+                <div className="mb-8 pb-8 border-b border-slate-200">
+                  <h3 className="text-lg font-bold mb-4 text-slate-900">Budget</h3>
                   <div className="space-y-4">
                     <div>
                       <input
@@ -141,32 +142,32 @@ export default function BuyPage() {
                         max="5000000"
                         value={filters.priceMax}
                         onChange={(e) => setFilters({ ...filters, priceMax: parseInt(e.target.value) })}
-                        className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                       />
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-slate-400">₹ {(filters.priceMin / 100000).toFixed(1)}L</span>
-                      <span className="text-cyan-400 font-semibold">₹{(filters.priceMax / 100000).toFixed(1)}L</span>
+                      <span className="text-slate-600">₹ {(filters.priceMin / 100000).toFixed(1)}L</span>
+                      <span className="text-blue-600 font-bold">₹{(filters.priceMax / 100000).toFixed(1)}L</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Make & Model Search */}
-                <div className="mb-8 pb-8 border-b border-slate-800">
-                  <h3 className="text-lg font-semibold mb-4 text-white">Make & Model</h3>
+                <div className="mb-8 pb-8 border-b border-slate-200">
+                  <h3 className="text-lg font-bold mb-4 text-slate-900">Make & Model</h3>
                   <div className="relative mb-4">
-                    <Search className="absolute left-3 top-3 w-4 h-4 text-slate-500" />
+                    <Search className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
                     <input
                       type="text"
                       placeholder="Search a brand or model"
                       value={filters.brand}
                       onChange={(e) => setFilters({ ...filters, brand: e.target.value })}
-                      className="w-full pl-10 pr-4 py-2 bg-slate-800/50 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-400 text-white placeholder-slate-500 text-sm"
+                      className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200 text-slate-900 placeholder-slate-500 text-sm"
                     />
                   </div>
 
                   <div className="mb-4">
-                    <button className="w-full text-left font-semibold text-slate-300 mb-2">All Brands</button>
+                    <button className="w-full text-left font-bold text-slate-700 mb-2">All Brands</button>
                   </div>
 
                   {/* Brand List */}
@@ -177,9 +178,9 @@ export default function BuyPage() {
                           type="checkbox"
                           checked={filters.brand === brand}
                           onChange={(e) => setFilters({ ...filters, brand: e.target.checked ? brand : '' })}
-                          className="w-4 h-4 rounded bg-slate-700 border-slate-600 text-cyan-500 cursor-pointer"
+                          className="w-4 h-4 rounded bg-white border-slate-300 text-blue-600 cursor-pointer accent-blue-600"
                         />
-                        <span className="text-slate-300 group-hover:text-slate-200 text-sm">{brand}</span>
+                        <span className="text-slate-700 group-hover:text-blue-600 text-sm transition">{brand}</span>
                         <span className="text-slate-500 text-sm ml-auto">({count})</span>
                       </label>
                     ))}
@@ -187,8 +188,8 @@ export default function BuyPage() {
                 </div>
 
                 {/* Fuel Type Filter */}
-                <div className="mb-8 pb-8 border-b border-slate-800">
-                  <h3 className="text-lg font-semibold mb-4 text-white">Fuel Type</h3>
+                <div className="mb-8 pb-8 border-b border-slate-200">
+                  <h3 className="text-lg font-bold mb-4 text-slate-900">Fuel Type</h3>
                   <div className="space-y-2">
                     {['Petrol', 'Diesel', 'CNG', 'Hybrid', 'Electric'].map(fuel => (
                       <label key={fuel} className="flex items-center gap-3 cursor-pointer group">
@@ -196,9 +197,9 @@ export default function BuyPage() {
                           type="checkbox"
                           checked={filters.fuelType === fuel}
                           onChange={(e) => setFilters({ ...filters, fuelType: e.target.checked ? fuel : '' })}
-                          className="w-4 h-4 rounded bg-slate-700 border-slate-600 text-cyan-500 cursor-pointer"
+                          className="w-4 h-4 rounded bg-white border-slate-300 text-blue-600 cursor-pointer accent-blue-600"
                         />
-                        <span className="text-slate-300 group-hover:text-slate-200 text-sm">{fuel}</span>
+                        <span className="text-slate-700 group-hover:text-blue-600 text-sm transition">{fuel}</span>
                       </label>
                     ))}
                   </div>
@@ -206,7 +207,7 @@ export default function BuyPage() {
 
                 {/* Condition Filter */}
                 <div className="mb-4">
-                  <h3 className="text-lg font-semibold mb-4 text-white">Condition</h3>
+                  <h3 className="text-lg font-bold mb-4 text-slate-900">Condition</h3>
                   <div className="space-y-2">
                     {['Excellent', 'Good', 'Average', 'Fair'].map(cond => (
                       <label key={cond} className="flex items-center gap-3 cursor-pointer group">
@@ -214,9 +215,9 @@ export default function BuyPage() {
                           type="checkbox"
                           checked={filters.condition === cond}
                           onChange={(e) => setFilters({ ...filters, condition: e.target.checked ? cond : '' })}
-                          className="w-4 h-4 rounded bg-slate-700 border-slate-600 text-cyan-500 cursor-pointer"
+                          className="w-4 h-4 rounded bg-white border-slate-300 text-blue-600 cursor-pointer accent-blue-600"
                         />
-                        <span className="text-slate-300 group-hover:text-slate-200 text-sm">{cond}</span>
+                        <span className="text-slate-700 group-hover:text-blue-600 text-sm transition">{cond}</span>
                       </label>
                     ))}
                   </div>
@@ -228,7 +229,7 @@ export default function BuyPage() {
                     setFilters({ priceMin: 100000, priceMax: 5000000, brand: '', fuelType: '', condition: '' });
                     setSortBy('relevance');
                   }}
-                  className="w-full mt-6 px-4 py-2 bg-slate-800/50 border border-slate-700 hover:border-cyan-400/50 rounded-lg font-semibold transition text-sm text-slate-300"
+                  className="w-full mt-6 px-4 py-2 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-lg font-semibold transition text-sm text-slate-700"
                 >
                   Reset Filters
                 </button>
@@ -238,16 +239,16 @@ export default function BuyPage() {
             {/* Right Section - Results & Grid */}
             <div className="flex-1">
               {/* Sort & Results Info */}
-              <div className="flex items-center justify-between mb-6 pb-6 border-b border-slate-800">
-                <div className="text-slate-400">
-                  Showing <span className="text-cyan-400 font-semibold">{sortedVehicles.length}</span> vehicles
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-200">
+                <div className="text-slate-600">
+                  Showing <span className="text-blue-600 font-bold">{sortedVehicles.length}</span> vehicles
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-slate-400 text-sm">❤️ Wishlist: <span className="text-cyan-400 font-semibold">{wishlist.length}</span></span>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full sm:w-auto">
+                  <span className="text-slate-600 text-sm">❤️ Wishlist: <span className="text-blue-600 font-bold">{wishlist.length}</span></span>
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-lg focus:outline-none focus:border-cyan-400 text-white text-sm"
+                    className="px-4 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200 text-slate-900 text-sm"
                   >
                     <option value="relevance">Most Relevant</option>
                     <option value="price-low">Price: Low to High</option>
@@ -259,15 +260,15 @@ export default function BuyPage() {
               </div>
 
               {/* Vehicles Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {sortedVehicles.map(vehicle => (
                   <div
                     key={vehicle._id}
-                    className="bg-slate-900/50 border border-slate-800 hover:border-cyan-400/50 rounded-xl overflow-hidden transition hover:shadow-lg hover:shadow-cyan-400/10 group cursor-pointer"
+                    className="bg-white border border-slate-200 hover:border-blue-400 rounded-2xl overflow-hidden transition hover:shadow-lg group cursor-pointer"
                     onClick={() => setSelectedVehicle(vehicle)}
                   >
                     {/* Image Container */}
-                    <div className="relative overflow-hidden h-48 bg-slate-800">
+                    <div className="relative overflow-hidden h-40 bg-slate-100">
                       <img
                         src={vehicle.image}
                         alt={`${vehicle.brand} ${vehicle.model}`}
@@ -275,27 +276,27 @@ export default function BuyPage() {
                       />
                       {/* Badge & Wishlist */}
                       <div className="absolute top-3 right-3 flex gap-2">
-                        <div className="bg-cyan-500 text-slate-950 px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
+                        {/* <div className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1 shadow-md">
                           <TrendingUp className="w-3 h-3" />
                           {priceDiscount(vehicle)}% off
-                        </div>
+                        </div> */}
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             toggleWishlist(vehicle._id);
                           }}
-                          className="bg-slate-950/70 hover:bg-slate-950 p-2 rounded-full transition"
+                          className="bg-white/90 hover:bg-white p-2 rounded-full transition shadow-md"
                         >
                           <Heart
                             className="w-5 h-5"
                             fill={wishlist.includes(vehicle._id) ? 'currentColor' : 'none'}
-                            color={wishlist.includes(vehicle._id) ? '#ef4444' : '#e2e8f0'}
+                            color={wishlist.includes(vehicle._id) ? '#dc2626' : '#475569'}
                           />
                         </button>
                       </div>
 
                       {/* Badge/Certification */}
-                      <div className="absolute top-3 left-3 bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 px-2 py-1 rounded text-xs font-semibold flex items-center gap-1">
+                      <div className="absolute bottom-1 left-1 bg-blue-100 border border-blue-300 text-blue-700 px-2 py-1 rounded text-xs font-bold flex items-center gap-1">
                         ✓ AI Verified
                       </div>
                     </div>
@@ -303,70 +304,39 @@ export default function BuyPage() {
                     {/* Content */}
                     <div className="p-4">
                       {/* Title */}
-                      <h3 className="text-lg font-bold mb-1">{vehicle.year} {vehicle.brand} {vehicle.model}</h3>
+                      <h3 className="text-lg font-bold mb-1 text-slate-900">{vehicle.year} {vehicle.brand} {vehicle.model}</h3>
 
-                      {/* Key Stats - 4 Column Grid */}
-                      <div className="grid grid-cols-3 gap-2 mb-4 pb-4 border-b border-slate-800">
+                      {/* Key Stats - 3 Column Grid */}
+                      <div className="grid grid-cols-3 gap-2 mb-2 pb-2 border-b border-slate-200">
                         <div className="flex items-center gap-1 text-sm">
-                          <Gauge className="w-4 h-4 text-cyan-400" />
-                          <span className="text-slate-400">{vehicle.mileage.toLocaleString()} </span>
+                          <Gauge className="w-4 h-4 text-blue-600" />
+                          <span className="text-slate-600">{vehicle.mileage.toLocaleString()} </span>
                         </div>
                         <div className="flex items-center gap-1 text-sm">
-                          <Fuel className="w-4 h-4 text-cyan-400" />
-                          <span className="text-slate-400">{vehicle.fuelType}</span>
+                          <Fuel className="w-4 h-4 text-blue-600" />
+                          <span className="text-slate-600">{vehicle.fuelType}</span>
                         </div>
                         <div className="flex items-center gap-1 text-sm">
-                          <span className="text-slate-400">| {vehicle.transmission} |</span>
+                          <span className="text-slate-600">|{vehicle.transmission}|</span>
                         </div>
                       </div>
 
                       {/* Price & EMI Section */}
-                      <div className="mb-4">
+                      <div className="mb-2">
                         <div className="flex items-baseline gap-2 mb-1">
-                          <span className="text-2xl font-bold text-cyan-400">₹{(vehicle.askingPrice / 100000).toFixed(2)}L</span>
-                          {/* <span className="text-sm text-slate-400 line-through">₹{(vehicle.marketValue / 100000).toFixed(2)}L</span> */}
+                          <span className="text-xl font-bold text-blue-600">₹{(vehicle.askingPrice / 100000).toFixed(2)}L</span>
                         </div>
                         <p className="text-xs text-slate-500">EMI starts ₹{Math.round(vehicle.askingPrice / 60).toLocaleString()}/month</p>
                       </div>
 
                       {/* Location */}
-                      <div className="flex items-center gap-1 text-slate-400 text-sm mb-3">
-                        <MapPin className="w-4 h-4" />
+                      <div className="flex items-center gap-1 text-slate-600 text-sm mb-2">
+                        <MapPin className="w-4 h-4 text-blue-600" />
                         {vehicle.seller?.city}, {vehicle.seller?.state}
                       </div>
 
-                      {/* Health Score Bar */}
-                      {/* <div className="mb-3">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-semibold text-slate-300">Health Score</span>
-                          <span className={`text-xs font-bold ${vehicle.healthScore >= 90 ? 'text-green-400' : vehicle.healthScore >= 80 ? 'text-yellow-400' : 'text-orange-400'}`}>
-                            {vehicle.healthScore}%
-                          </span>
-                        </div>
-                        <div className="w-full bg-slate-700 rounded-full h-1.5">
-                          <div
-                            className={`h-1.5 rounded-full ${vehicle.healthScore >= 90 ? 'bg-green-400' : vehicle.healthScore >= 80 ? 'bg-yellow-400' : 'bg-orange-400'}`}
-                            style={{ width: `${vehicle.healthScore}%` }}
-                          ></div>
-                        </div>
-                      </div> */}
-
-                      {/* Features (2 visible + more indicator) */}
-                      {/* <div className="flex flex-wrap gap-1 mb-3">
-                        {vehicle.features?.slice(0, 2).map((feature, idx) => (
-                          <span key={idx} className="text-xs bg-slate-800/50 text-slate-300 px-2 py-1 rounded">
-                            {feature}
-                          </span>
-                        ))}
-                        {vehicle.features?.length > 2 && (
-                          <span className="text-xs bg-slate-800/50 text-cyan-400 px-2 py-1 rounded">
-                            +{vehicle.features.length - 2} more
-                          </span>
-                        )}
-                      </div> */}
-
                       {/* View Details Button */}
-                      <button className="w-full py-2 bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-400/50 transition text-sm">
+                      <button className="w-full py-1 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-600/30 transition text-sm">
                         View Details
                       </button>
                     </div>
@@ -377,14 +347,14 @@ export default function BuyPage() {
               {/* Empty State */}
               {sortedVehicles.length === 0 && (
                 <div className="text-center py-16">
-                  <AlertCircle className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                  <p className="text-xl text-slate-400 mb-4">No vehicles found matching your criteria</p>
+                  <AlertCircle className="w-16 h-16 text-slate-300 mx-auto mb-4" />
+                  <p className="text-xl text-slate-600 mb-4">No vehicles found matching your criteria</p>
                   <button
                     onClick={() => {
                       setFilters({ priceMin: 100000, priceMax: 5000000, brand: '', fuelType: '', condition: '' });
                       setSortBy('relevance');
                     }}
-                    className="px-6 py-3 bg-cyan-400/10 border border-cyan-400/50 text-cyan-400 rounded-lg hover:bg-cyan-400/20 transition font-medium"
+                    className="px-6 py-3 bg-blue-100 border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-200 transition font-medium"
                   >
                     Clear Filters
                   </button>
@@ -397,15 +367,15 @@ export default function BuyPage() {
 
       {/* Vehicle Detail Modal */}
       {selectedVehicle && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-5xl w-full max-h-[85vh] overflow-y-auto">
-            <div className="sticky top-0 flex items-center justify-between bg-slate-900/95 border-b border-slate-800 p-6">
-              <h2 className="text-2xl font-bold">{selectedVehicle.brand} {selectedVehicle.model}</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm p-4">
+          <div className="bg-white border border-slate-200 rounded-3xl max-w-5xl w-full max-h-[85vh] overflow-y-auto shadow-2xl">
+            <div className="sticky top-0 flex items-center justify-between bg-white/95 border-b border-slate-200 p-6">
+              <h2 className="text-2xl font-bold text-slate-900">{selectedVehicle.brand} {selectedVehicle.model}</h2>
               <button
                 onClick={() => setSelectedVehicle(null)}
-                className="p-2 hover:bg-slate-800 rounded-lg transition"
+                className="p-2 hover:bg-slate-100 rounded-lg transition"
               >
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6 text-slate-600" />
               </button>
             </div>
 
@@ -413,63 +383,63 @@ export default function BuyPage() {
               <img
                 src={selectedVehicle.image}
                 alt={`${selectedVehicle.brand} ${selectedVehicle.model}`}
-                className="w-full h-64 object-cover rounded-xl"
+                className="w-full h-64 object-cover rounded-xl border border-slate-200"
               />
 
               {/* Price Section */}
-              <div className="grid md:grid-cols-2 gap-6 pb-6 border-b border-slate-800">
+              <div className="grid md:grid-cols-2 gap-6 pb-6 border-b border-slate-200">
                 <div>
-                  <p className="text-slate-400 text-sm mb-1">Asking Price</p>
-                  <p className="text-3xl font-bold text-cyan-400">₹{(selectedVehicle.askingPrice / 100000).toFixed(2)}L</p>
+                  <p className="text-slate-600 text-sm mb-1 font-medium">Asking Price</p>
+                  <p className="text-3xl font-bold text-blue-600">₹{(selectedVehicle.askingPrice / 100000).toFixed(2)}L</p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-sm mb-1">Market Value</p>
-                  <p className="text-3xl font-bold text-green-400">₹{(selectedVehicle.marketValue / 100000).toFixed(2)}L</p>
+                  <p className="text-slate-600 text-sm mb-1 font-medium">Market Value</p>
+                  <p className="text-3xl font-bold text-green-600">₹{(selectedVehicle.marketValue / 100000).toFixed(2)}L</p>
                 </div>
               </div>
 
               {/* Key Details */}
               <div>
-                <h4 className="text-lg font-semibold mb-4 text-slate-200">Vehicle Specifications</h4>
+                <h4 className="text-lg font-bold mb-4 text-slate-900">Vehicle Specifications</h4>
                 <div className="grid grid-cols-3 gap-4">
-                  <div className="bg-slate-800/30 p-4 rounded-xl">
-                    <p className="text-slate-400 text-sm mb-1">Year</p>
-                    <p className="text-lg font-semibold">{selectedVehicle.year}</p>
+                  <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                    <p className="text-slate-600 text-sm mb-1 font-medium">Year</p>
+                    <p className="text-lg font-bold text-slate-900">{selectedVehicle.year}</p>
                   </div>
-                  <div className="bg-slate-800/30 p-4 rounded-xl">
-                    <p className="text-slate-400 text-sm mb-1">Mileage</p>
-                    <p className="text-lg font-semibold">{selectedVehicle.mileage} km</p>
+                  <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                    <p className="text-slate-600 text-sm mb-1 font-medium">Mileage</p>
+                    <p className="text-lg font-bold text-slate-900">{selectedVehicle.mileage} km</p>
                   </div>
-                  <div className="bg-slate-800/30 p-4 rounded-xl">
-                    <p className="text-slate-400 text-sm mb-1">Fuel Type</p>
-                    <p className="text-lg font-semibold">{selectedVehicle.fuelType}</p>
+                  <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                    <p className="text-slate-600 text-sm mb-1 font-medium">Fuel Type</p>
+                    <p className="text-lg font-bold text-slate-900">{selectedVehicle.fuelType}</p>
                   </div>
-                  <div className="bg-slate-800/30 p-4 rounded-xl">
-                    <p className="text-slate-400 text-sm mb-1">Transmission</p>
-                    <p className="text-lg font-semibold">{selectedVehicle.transmission}</p>
+                  <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                    <p className="text-slate-600 text-sm mb-1 font-medium">Transmission</p>
+                    <p className="text-lg font-bold text-slate-900">{selectedVehicle.transmission}</p>
                   </div>
-                  <div className="bg-slate-800/30 p-4 rounded-xl">
-                    <p className="text-slate-400 text-sm mb-1">Engine CC</p>
-                    <p className="text-lg font-semibold">{selectedVehicle.engineCC}</p>
+                  <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                    <p className="text-slate-600 text-sm mb-1 font-medium">Engine CC</p>
+                    <p className="text-lg font-bold text-slate-900">{selectedVehicle.engineCC}</p>
                   </div>
-                  <div className="bg-slate-800/30 p-4 rounded-xl">
-                    <p className="text-slate-400 text-sm mb-1">Ownership</p>
-                    <p className="text-lg font-semibold">{selectedVehicle.ownershipType}</p>
+                  <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                    <p className="text-slate-600 text-sm mb-1 font-medium">Ownership</p>
+                    <p className="text-lg font-bold text-slate-900">{selectedVehicle.ownershipType}</p>
                   </div>
                 </div>
               </div>
 
               {/* Health Score */}
-              <div className="bg-slate-800/30 rounded-lg p-4">
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-semibold text-slate-300">Overall Health Score</span>
-                  <span className={`text-2xl font-bold ${selectedVehicle.healthScore >= 90 ? 'text-green-400' : selectedVehicle.healthScore >= 80 ? 'text-yellow-400' : 'text-orange-400'}`}>
+                  <span className="text-sm font-bold text-slate-900">Overall Health Score</span>
+                  <span className={`text-2xl font-bold ${selectedVehicle.healthScore >= 90 ? 'text-green-600' : selectedVehicle.healthScore >= 80 ? 'text-yellow-600' : 'text-orange-600'}`}>
                     {selectedVehicle.healthScore}%
                   </span>
                 </div>
-                <div className="w-full bg-slate-700 rounded-full h-3">
+                <div className="w-full bg-slate-300 rounded-full h-3">
                   <div
-                    className={`h-3 rounded-full transition ${selectedVehicle.healthScore >= 90 ? 'bg-green-400' : selectedVehicle.healthScore >= 80 ? 'bg-yellow-400' : 'bg-orange-400'}`}
+                    className={`h-3 rounded-full transition ${selectedVehicle.healthScore >= 90 ? 'bg-green-500' : selectedVehicle.healthScore >= 80 ? 'bg-yellow-500' : 'bg-orange-500'}`}
                     style={{ width: `${selectedVehicle.healthScore}%` }}
                   ></div>
                 </div>
@@ -477,35 +447,35 @@ export default function BuyPage() {
 
               {/* Additional Info */}
               <div>
-                <h4 className="text-lg font-semibold mb-4 text-slate-200">Additional Information</h4>
+                <h4 className="text-lg font-bold mb-4 text-slate-900">Additional Information</h4>
                 <div className="space-y-3">
-                  <div className="flex justify-between items-start bg-slate-800/20 p-3 rounded-lg">
-                    <span className="text-slate-400">Registration Number</span>
-                    <span className="font-semibold text-slate-200">{selectedVehicle.registrationNumber}</span>
+                  <div className="flex justify-between items-start bg-slate-50 p-3 rounded-lg border border-slate-200">
+                    <span className="text-slate-600 font-medium">Registration Number</span>
+                    <span className="font-semibold text-slate-900">{selectedVehicle.registrationNumber}</span>
                   </div>
-                  <div className="flex justify-between items-start bg-slate-800/20 p-3 rounded-lg">
-                    <span className="text-slate-400">Insurance Validity</span>
-                    <span className="font-semibold text-slate-200">{selectedVehicle.insuranceValidity}</span>
+                  <div className="flex justify-between items-start bg-slate-50 p-3 rounded-lg border border-slate-200">
+                    <span className="text-slate-600 font-medium">Insurance Validity</span>
+                    <span className="font-semibold text-slate-900">{selectedVehicle.insuranceValidity}</span>
                   </div>
-                  <div className="flex justify-between items-start bg-slate-800/20 p-3 rounded-lg">
-                    <span className="text-slate-400">Service History</span>
-                    <span className="font-semibold text-slate-200">{selectedVehicle.serviceHistory}</span>
+                  <div className="flex justify-between items-start bg-slate-50 p-3 rounded-lg border border-slate-200">
+                    <span className="text-slate-600 font-medium">Service History</span>
+                    <span className="font-semibold text-slate-900">{selectedVehicle.serviceHistory}</span>
                   </div>
                 </div>
               </div>
 
               {/* Description */}
               <div>
-                <h4 className="text-lg font-semibold mb-3 text-slate-200">Description</h4>
-                <p className="text-slate-300 leading-relaxed">{selectedVehicle.description}</p>
+                <h4 className="text-lg font-bold mb-3 text-slate-900">Description</h4>
+                <p className="text-slate-700 leading-relaxed">{selectedVehicle.description}</p>
               </div>
 
               {/* Features */}
               <div>
-                <h4 className="text-lg font-semibold mb-4 text-slate-200">Features & Amenities</h4>
+                <h4 className="text-lg font-bold mb-4 text-slate-900">Features & Amenities</h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedVehicle.features?.map((feature, idx) => (
-                    <span key={idx} className="bg-cyan-400/10 border border-cyan-400/30 text-cyan-400 px-3 py-2 rounded-lg text-sm font-medium">
+                    <span key={idx} className="bg-blue-100 border border-blue-300 text-blue-700 px-3 py-2 rounded-lg text-sm font-medium">
                       ✓ {feature}
                     </span>
                   ))}
@@ -513,13 +483,13 @@ export default function BuyPage() {
               </div>
 
               {/* Rating & Reviews */}
-              <div className="bg-slate-800/30 rounded-lg p-4">
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
                 <div className="flex items-center gap-4 mb-3">
                   <div className="flex items-center gap-1">
-                    <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                    <span className="text-xl font-bold">{selectedVehicle.rating}</span>
+                    <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                    <span className="text-xl font-bold text-slate-900">{selectedVehicle.rating}</span>
                   </div>
-                  <p className="text-slate-300">Based on {selectedVehicle.reviews} verified reviews</p>
+                  <p className="text-slate-700 font-medium">Based on {selectedVehicle.reviews} verified reviews</p>
                 </div>
               </div>
 
@@ -529,13 +499,13 @@ export default function BuyPage() {
                   onClick={() => toggleWishlist(selectedVehicle._id)}
                   className={`flex-1 py-3 rounded-xl font-semibold transition ${
                     wishlist.includes(selectedVehicle._id)
-                      ? 'bg-red-500/20 border border-red-500/50 text-red-300 hover:bg-red-500/30'
-                      : 'bg-slate-800/50 border border-slate-700 text-slate-300 hover:border-slate-600'
+                      ? 'bg-red-100 border border-red-300 text-red-700 hover:bg-red-200'
+                      : 'bg-slate-100 border border-slate-300 text-slate-700 hover:bg-slate-200'
                   }`}
                 >
                   {wishlist.includes(selectedVehicle._id) ? '❤️ Added to Wishlist' : '🤍 Save to Wishlist'}
                 </button>
-                <button className="flex-1 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-400/50 transition">
+                <button className="flex-1 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-600/30 transition">
                   Contact Seller
                 </button>
               </div>
@@ -543,6 +513,7 @@ export default function BuyPage() {
           </div>
         </div>
       )}
+      <Footer/>
     </div>
   );
 }
